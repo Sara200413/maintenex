@@ -3,9 +3,6 @@ skinparam classAttributeIconSize 0
 skinparam monochrome true
 skinparam shadowing false
 
-' ========================================================
-' Énumérations (Cahier des charges - Section 8.1)
-' ========================================================
 enum TypeIntervention {
   PREVENTIVE
   CORRECTIVE
@@ -23,9 +20,7 @@ enum StatutIntervention {
   TERMINEE
 }
 
-' ========================================================
-' Entités Métier (Cahier des charges - Section 8.1)
-' ========================================================
+
 class Equipement {
   +id : Long
   +code : String
@@ -56,15 +51,10 @@ class Intervention {
   +terminer(date : LocalDate, duree : int, cout : double) : void
 }
 
-' ========================================================
-' Associations & Multiplicités (Section 8.2)
-' ========================================================
 Equipement "1" <-- "0..*" Intervention : est sujet de >
 Technicien "1" <-- "0..*" Intervention : réalise <
 
-' ========================================================
-' Notes d'aide & Traçabilité des règles métier
-' ========================================================
+
 note right of Equipement::"/nbPannes"
   Attribut dérivé (RG-07) :
   Comptage des interventions
