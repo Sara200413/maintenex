@@ -1,0 +1,79 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+skinparam shadowing false
+
+' ========================================================
+' Énumérations (Cahier des charges - Section 8.1)
+' ========================================================
+enum TypeIntervention {
+  PREVENTIVE
+  CORRECTIVE
+}
+
+enum StatutEquipement {
+  EN_SERVICE
+  EN_PANNE
+  EN_MAINTENANCE
+}
+
+enum StatutIntervention {
+  PLANIFIEE
+  EN_COURS
+  TERMINEE
+}
+
+' ========================================================
+' Entités Métier (Cahier des charges - Section 8.1)
+' ========================================================
+class Equipement {
+  +id : Long
+  +code : String
+  +nom : String
+  +type : String
+  +localisation : String
+  +dateMiseEnService : LocalDate
+  +statut : StatutEquipement
+  +/nbPannes : int
+}
+
+class Technicien {
+  +id : Long
+  +nom : String
+  +specialite : String
+  +email : String
+}
+
+class Intervention {
+  +id : Long
+  +type : TypeIntervention
+  +datePlanifiee : LocalDate
+  +dateRealisation : LocalDate
+  +dureeMin : int
+  +cout : double
+  +statut : StatutIntervention
+  +description : String
+  +terminer(date : LocalDate, duree : int, cout : double) : void
+}
+
+' ========================================================
+' Associations & Multiplicités (Section 8.2)
+' ========================================================
+Equipement "1" <-- "0..*" Intervention : est sujet de >
+Technicien "1" <-- "0..*" Intervention : réalise <
+
+' ========================================================
+' Notes d'aide & Traçabilité des règles métier
+' ========================================================
+note right of Equipement::"/nbPannes"
+  Attribut dérivé (RG-07) :
+  Comptage des interventions
+  de type CORRECTIVE
+end note
+
+note right of Intervention::"terminer"
+  Précondition (RG-08) :
+  statut <> TERMINEE
+end note
+
+@enduml
