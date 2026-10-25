@@ -1,4 +1,4 @@
-# Spécification Formelle des Règles Métier en OCL (Maintenex / GearFlow)
+# Spécification Formelle des Règles Métier en OCL (Maintenex )
 
 Ce document formalise les 8 règles de gestion critiques du système de GMAO à l'aide du langage **OCL (Object Constraint Language)**. Ces contraintes d'intégrité définissent les règles appliquées dans la base de données Oracle 21c (contraintes CHECK et déclencheurs), la couche de domaine Java/Spring Boot (services et annotations de validation), ainsi que les formulaires de l'interface Angular.
 
